@@ -98,32 +98,8 @@
           @include('admin.common.menuright')
           @include('admin.common.sidebar')
           @include('admin.common.header')
-         <!-- @yield('content') -->
 
-
-         <div class="col-lg-12">
-        <div class="card" data-order-id="card-14">
-            <div class="card-header">
-                <div class="pull-right utils__sortable__control">
-                    <i class="icmn-minus mr-2 utils__sortable__collapse" data-toggle="tooltip" data-placement="left"
-                       title=""
-                       data-original-title="Collapse"></i>
-                    <i class="icmn-plus mr-2 utils__sortable__uncollapse" data-toggle="tooltip"
-                       data-placement="left" title=""
-                       data-original-title="Uncollapse"></i>
-                    <i class="icmn-cross utils__sortable__close" data-toggle="tooltip" data-placement="left"
-                       title=""
-                       data-original-title="Remove"></i>
-                </div>
-                <div class="utils__title"><strong>Calendar</strong></div>
-                <div class="utils__titleDescription">Block with important Calendar information</div>
-            </div>
-            <div class="card-body">
-                <div class="example-calendar-block"></div>
-            </div>
-        </div>
-    </div>
-
+          @yield('content')
     
           @include('admin.common.footer')  
 
