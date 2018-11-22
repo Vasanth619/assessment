@@ -37,6 +37,7 @@
     <script src="{{ asset('vendors/popper.js/dist/umd/popper.js') }}"></script>
     <script src="{{ asset('vendors/jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('vendors/html5-form-validation/dist/jquery.validation.min.js') }}"></script>
     <script src="{{ asset('vendors/jquery-mousewheel/jquery.mousewheel.min.js') }}"></script>
     <script src="{{ asset('vendors/perfect-scrollbar/js/perfect-scrollbar.jquery.js') }}"></script>
     <script src="{{ asset('vendors/spin.js/spin.js') }}"></script>

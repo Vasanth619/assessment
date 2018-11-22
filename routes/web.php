@@ -30,6 +30,10 @@ Route::get('/register', function() {
 
 Route::post('/create_admin', 'Auth\RegisterController@create');
 Route::post('/admin_login', 'Auth\LoginController@loginAdmin');
-Route::get('/admin/dashboard', function() {
+Route::get('/admin', function() {
 	return view('admin.dashboard');
 });
+Route::get('/admin/question_category', 'CategoryController@index');
+Route::post('/admin/add_questioncategory', 'CategoryController@create');
+Route::get('/admin/question', 'QuestionController@index');
+Route::get('/admin/new_question', 'QuestionController@create');

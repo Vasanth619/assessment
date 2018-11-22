@@ -19,68 +19,38 @@
                     <span class="menu-left__icon icmn-cog utils__spin-delayed--pseudo-selector"></span>
                     Dashboard
                 </a>
-            <li class="menu-left__item menu-left__item--active">
-                <a href="https://docs.cleanuitemplate.com/" target="_blank">
-                    <span class="menu-left__icon icmn-books"></span>
-                    Documentation
-                </a>
-            </li>
                       
             <li class="menu-left__divider"><!-- --></li>
             <li class="menu-left__item menu-left__submenu">
                 <a href="javascript: void(0);">
                     <span class="menu-left__icon icmn-file-text"></span>
-                    Default Pages
+                   Questions
                 </a>
                 <ul class="menu-left__list">
                     <li class="menu-left__item">
-                        <a href="pages-login-alpha.html">
+                        <a href="{{ url('/admin/question') }}">
                             <span class="menu-left__icon">LA</span>
-                            Login Alpha
+                            Total Questions
                         </a>
                     </li>
+                    
+                </ul>
+            </li>
+
+            <li class="menu-left__divider"><!-- --></li>
+            <li class="menu-left__item menu-left__submenu">
+                <a href="javascript: void(0);">
+                    <span class="menu-left__icon icmn-file-text"></span>
+                   Categories
+                </a>
+                <ul class="menu-left__list">
                     <li class="menu-left__item">
-                        <a href="pages-login-beta.html">
-                            <span class="menu-left__icon">LB</span>
-                            Login Beta
+                        <a href="{{ url('/admin/question_category') }}">
+                            <span class="menu-left__icon">LA</span>
+                            Total Categories
                         </a>
                     </li>
-                    <li class="menu-left__item">
-                        <a href="pages-register.html">
-                            <span class="menu-left__icon">R</span>
-                            Register
-                        </a>
-                    </li>
-                    <li class="menu-left__item">
-                        <a href="pages-lockscreen.html">
-                            <span class="menu-left__icon">LS</span>
-                            Lockscreen
-                        </a>
-                    </li>
-                    <li class="menu-left__item">
-                        <a href="pages-pricing-tables.html">
-                            <span class="menu-left__icon">PT</span>
-                            Pricing Tables
-                        </a>
-                    </li>
-                    <li class="menu-left__item">
-                        <a href="pages-invoice.html">
-                            <span class="menu-left__icon">I</span>
-                            Invoice
-                        </a>
-                    </li>
-                    <li class="menu-left__item">
-                        <a href="pages-page-404.html">
-                            <span class="menu-left__icon">P4</span>
-                            Page 404
-                        </a>
-                    </li>
-                    <li class="menu-left__item">
-                        <a href="pages-page-500.html">
-                            <span class="menu-left__icon">P5</span>
-                            Page 500
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
            
