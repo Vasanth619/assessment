@@ -37,3 +37,4 @@ Route::get('/admin/question_category', 'CategoryController@index');
 Route::post('/admin/add_questioncategory', 'CategoryController@create');
 Route::get('/admin/question', 'QuestionController@index');
 Route::get('/admin/new_question', 'QuestionController@create');
+Route::post('admin/store_question', 'QuestionController@store');

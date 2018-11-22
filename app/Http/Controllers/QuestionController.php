@@ -39,7 +39,17 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*$question = new Question;
+        $question->name = $request->question;
+        $question->category = $request->question;
+        $question->status = $request->question;
+        $question->choice = json_encode($request->question);
+        $question->answer = $request->question;
+        $question->save();
+
+        return redirect('/admin/question');*/
+
+        dd($request);
     }
 
     /**
