@@ -68,16 +68,20 @@
                         </tr>
                         </thead>
                         <tbody>
+                     @php
+                       $i = 1;
+                     @endphp
+
                     @foreach($categories as $category)
 
                      
                         <tr>
-                            <td tabindex="1">1</td>
+                            <td tabindex="1">{{ $i++ }}</td>
                             <td tabindex="1">{{ $category->name }}</td>
                             <td tabindex="1">{{ $category->updated_at }}</td>
                             <td tabindex="1">{{ $category->created_at }}</td>
                             <td tabindex="1">{{ $category->status }}</td>
-                            <td tabindex="1">Edit / Delete</td>
+                            <td><a edit-id="{{ $category->id }}" class="edit_category">Edit</a> / <a delete-id="{{ $category->id }}" class="delete_category">Delete</a></td>
                         </tr>
                     @endforeach
                         </tbody>
@@ -177,6 +181,55 @@ $("form").validate({
             error.insertAfter(element);
     }
 });
+</script>
+
+
+
+<script>
+ 
+ $('body').on('click', '.delete_category', function() {
+    var delete_category = $(this).attr('delete-id');
+    swal({
+        title: "Are you sure?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel plx!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    },
+    function(isConfirm) {
+        if (isConfirm) {
+            $.ajax({
+                url: '{{ url("/admin/delete_category") }}',
+                method: 'post',
+                data:{
+                    '_token': "{{ csrf_token() }}",
+                    'data_id':  delete_category,
+                    
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if(response.status == 1) {
+                        swal(response.message ,"success");
+
+                        location.reload();
+                    }
+                    else if(response.status == 0) {
+                        swal(response.message ,"error");
+
+                        location.reload();
+                    }
+                }
+            });
+    } else {
+        
+    }
+    });
+
+});
+
 </script>
 
 @endsection

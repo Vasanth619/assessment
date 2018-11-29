@@ -35,6 +35,10 @@ Route::get('/admin', function() {
 });
 Route::get('/admin/question_category', 'CategoryController@index');
 Route::post('/admin/add_questioncategory', 'CategoryController@create');
+Route::post('/admin/delete_category', 'CategoryController@destroy');
+Route::get('/admin/question_sub_category', 'SubCategoryController@index');
+Route::post('/admin/add_question_sub_category', 'SubCategoryController@store');
+Route::post('/admin/delete_subcategory', 'SubCategoryController@destroy');
 Route::get('/admin/question', 'QuestionController@index');
 Route::get('/admin/new_question', 'QuestionController@create');
 Route::post('admin/store_question', 'QuestionController@store');

@@ -46,16 +46,18 @@
                 <ul class="menu-left__list">
                     <li class="menu-left__item">
                         <a href="{{ url('/admin/question_category') }}">
-                            <span class="menu-left__icon">LA</span>
-                            Total Categories
+                            <span class="menu-left__icon">MC</span>
+                            Main Categories
                         </a>
                     </li>
-                    
+                    <li class="menu-left__item">
+                        <a href="{{ url('/admin/question_sub_category') }}">
+                            <span class="menu-left__icon">SC</span>
+                            Sub Categories
+                        </a>
+                    </li>
                 </ul>
-            </li>
-           
-          
-                        
+            </li>       
         </ul>
     </div>
 </nav>
