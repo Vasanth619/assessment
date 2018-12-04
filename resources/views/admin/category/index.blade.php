@@ -55,6 +55,9 @@
             </div>
 
 
+
+
+
                 <div class="table-responsive mb-5">
                     <table class="table table-hover nowrap editable-table" id="example1" style="cursor: pointer;">
                         <thead>
@@ -81,7 +84,7 @@
                             <td tabindex="1">{{ $category->updated_at }}</td>
                             <td tabindex="1">{{ $category->created_at }}</td>
                             <td tabindex="1">{{ $category->status }}</td>
-                            <td><a edit-id="{{ $category->id }}" class="edit_category">Edit</a> / <a delete-id="{{ $category->id }}" class="delete_category">Delete</a></td>
+                            <td><a edit-id="{{ $category->id }}" class="edit_category" data-toggle="modal" data-target="#example2">Edit</a> / <a delete-id="{{ $category->id }}" class="delete_category">Delete</a></td>
                         </tr>
                     @endforeach
                         </tbody>
@@ -91,7 +94,15 @@
             </div>
         </div>
         
+
+            <div class="modal" role="dialog" tabindex="-1" role="dialog" id="custom_prodtemp">
+            </div>  
+
     </div>
+
+
+        
+
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
@@ -228,6 +239,50 @@ $("form").validate({
     }
     });
 
+});
+
+
+$('body').on('click', '.edit_category', function() {
+    var edit_category = $(this).attr('edit-id');
+    
+    $('#edit_form').modal();
+
+            $.ajax({
+                url: '{{ url("/admin/edit_questioncategory") }}',
+                method: 'post',
+                data:{
+                    '_token': "{{ csrf_token() }}",
+                    'data_id':  edit_category,
+                    
+                },
+                dataType: 'json',
+                success: function(response) {
+                    
+                    $('#custom_prodtemp').empty().append(response.result);
+                    $('#custom_prodtemp').modal('show');                    
+                }
+            });
+         });
+
+
+
+$('body').on('click', '#update_questcategory', function() {
+       $.ajax({
+                url: '{{ url("/admin/update_questioncategory") }}',
+                method: 'post',
+                data:{
+                    id: $('#cat_id').val(),
+                    category_name: $('#editcategory_name').val(),
+                    status: $('#editcategory_status').val(),
+                    _token: '{{ csrf_token() }}',
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if(response.status == 1) {
+                        location.reload();
+                    }
+                }
+            });
 });
 
 </script>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Question;
+use App\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +18,9 @@ class QuestionController extends Controller
     public function index()
     {   
         $categories = DB::table('categories')->get();
-        return view('admin.question.index', ['categories' => $categories]);
+        $subcategories = DB::table('sub_categories')->get();
+        $questions = DB::table('questions')->leftJoin('categories', 'categories.id', '=', 'questions.category')->leftJoin('sub_categories', 'sub_categories.id' ,'=' ,'questions.sub_category')->select('categories.name as cat_name', 'sub_categories.name as subcat_name', 'questions.*')->get();
+        return view('admin.question.index', ['categories' => $categories, 'subcategories' => $subcategories, 'questions' => $questions]);
     }
 
     /**
@@ -28,7 +31,8 @@ class QuestionController extends Controller
     public function create()
     {   
         $categories = DB::table('categories')->get();
-        return view('admin.question.create', ['categories' => $categories]);
+        $subcategories = DB::table('sub_categories')->get();
+        return view('admin.question.create', ['categories' => $categories, 'subcategories' => $subcategories]);
     }
 
     /**
@@ -39,15 +43,16 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        /*$question = new Question;
-        $question->name = $request->question;
-        $question->category = $request->question;
-        $question->status = $request->question;
-        $question->choice = json_encode($request->question);
-        $question->answer = $request->question;
+        $question = new Question;
+        $question->question = $request->question_name;
+        $question->category = $request->question_category;
+        $question->sub_category = $request->question_subcategory;
+        $question->choice = json_encode($request->answer);
+        $question->answer = $request->correct_answer[0];
+        $question->status = $request->question_status;
         $question->save();
 
-        return redirect('/admin/question');*/
+        return redirect('/admin/question');
 
         dd($request);
     }

@@ -62,9 +62,13 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Request $request)
     {
-        //
+         $category_id = $request->data_id;
+         $categories = DB::table('categories')->where('id', $category_id)->get()->toArray();
+         $data['result'] = view('admin.category.edit_ajaxform', ['categories' => $categories])->render();
+
+         echo json_encode($data);
     }
 
     /**
@@ -74,9 +78,17 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request)
     {
-        //
+          $update_category = DB::table('categories')
+            ->where('id', $request->id)
+            ->update(['name' => $request->category_name, 'status' => $request->status]);
+
+            if($update_category) {
+                $data['status'] = 1;
+            }
+
+            echo json_encode($data);
     }
 
     /**

@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.dashboard');
 });
 
 
@@ -35,10 +35,13 @@ Route::get('/admin', function() {
 });
 Route::get('/admin/question_category', 'CategoryController@index');
 Route::post('/admin/add_questioncategory', 'CategoryController@create');
+Route::post('/admin/edit_questioncategory', 'CategoryController@edit');
 Route::post('/admin/delete_category', 'CategoryController@destroy');
+Route::post('/admin/update_questioncategory', 'CategoryController@update');
 Route::get('/admin/question_sub_category', 'SubCategoryController@index');
 Route::post('/admin/add_question_sub_category', 'SubCategoryController@store');
 Route::post('/admin/delete_subcategory', 'SubCategoryController@destroy');
+Route::get('/admin/get_subcategory', 'SubCategoryController@getSubCategory');
 Route::get('/admin/question', 'QuestionController@index');
 Route::get('/admin/new_question', 'QuestionController@create');
 Route::post('admin/store_question', 'QuestionController@store');

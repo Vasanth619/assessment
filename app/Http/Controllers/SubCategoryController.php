@@ -44,6 +44,8 @@ class SubCategoryController extends Controller
         $subcategory->name = $request->sub_category_name;
         $subcategory->status = $request->sub_category_status;
         $subcategory->save();
+
+        return redirect('/admin/question_sub_category');
     }
 
     /**
@@ -102,5 +104,13 @@ class SubCategoryController extends Controller
         }
           echo json_encode($data);
 
+    }
+
+    public function getSubCategory(Request $request){
+        $subcategories = SubCategory::where('parent_category_id', $request->category)->get()->toArray();
+      
+        echo view('admin.category.onchange_category', ['type' => 'sub_category', 'subcategories' => $subcategories])->render();
+
+        //echo json_encode($data);
     }
 }
