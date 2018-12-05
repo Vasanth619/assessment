@@ -45,3 +45,6 @@ Route::get('/admin/get_subcategory', 'SubCategoryController@getSubCategory');
 Route::get('/admin/question', 'QuestionController@index');
 Route::get('/admin/new_question', 'QuestionController@create');
 Route::post('admin/store_question', 'QuestionController@store');
+Route::get('seentest', function() {
+	return view('admin.test.create');
+});

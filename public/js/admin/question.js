@@ -1,4 +1,4 @@
-   $('.summernote').summernote({
+ $('.summernote').summernote({
        	    placeholder: 'write here...',
 		      toolbar: [
 		    
@@ -16,13 +16,19 @@
 		
 
 		$('body').on('click', '.add_newchoice', function() {
-			var template = $('#choice_template').clone();
-			    template.removeAttr('id');
-			$('#append_template').before(template.removeAttr('style'));
-			var i = 0;
-			$('.correct_answer').each(function() {
-				$(this).val(i++);
-			});
+
+			if(($('.question_choice').length) <= 5) {
+
+				$('.right_choice').addClass('question_choice');
+				var template = $('#choice_template').clone();
+				    template.removeAttr('id');
+				    template.find('.right_choice').val("");
+				$('#append_template').before(template.removeAttr('style'));
+				var i = 0;
+				$('.correct_answer').each(function() {
+					$(this).val(i++);
+				});
+			}
 		});
 
 		$('body').on('click', '.remove_choice', function() {
@@ -40,7 +46,13 @@
 		$('#' + errorText).empty();
 		$('#' + errorText).text(msg);
 		$('#' + error).show();
+
+		setTimeout(function() {
+			$('.alert-danger').hide();
+		}, 3000);
 	}
+
+
 
     //submit question
     $('body').on('click', '#submit_question', function() {
@@ -65,7 +77,36 @@
     	 	error_msg("error_question", "error_question_text", "Please enter question");
     	 	return;
     	 }
-        
-    });
-    
+         //validate choices
+         var choice = [];
+          $('.question_choice').each(function() {
+          	 if($(this).val() == ""){
+          	   error_msg("error_question", "error_question_text", "Choices should not empty");
+    	 	   return;
+          	 }
+          	 choice.push($(this).val());
+          });
+          //validate correct answer
+          if(document.querySelector('input[name="correct_answer"]:checked') == null) {
+              error_msg("error_question", "error_question_text", "Please select correct answer");
+              return;
+            }
 
+            $.ajax({
+            	url: $('form').attr('action'),
+            	method: 'post',
+            	data: {
+            		'_token': $('input[name="_token"]').val(),
+            		'question_category': $('#main_category').val(),
+            		'question_subcategory': $('#question_subcategory').val(),
+            		'question_name': $('#question_name').val(),
+            		'answer': document.querySelector('input[name="correct_answer"]:checked').value,
+            		'question_choice': choice,
+            		'question_status': $('#question_status').val(),
+            	},
+            	dataType: 'json',
+            	success: function() {
+
+            	}
+            });
+    });

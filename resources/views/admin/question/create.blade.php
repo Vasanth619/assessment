@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="col-md-3">
 				 <div class="card-body">
-				<form action="{{ url('admin/store_question') }}" method="post" id="new_question">
+				<form  action="{{ url('admin/store_question') }}" method="post" id="new_question">
 		     	 @csrf
 
 		     	 <div class="form-group"> 
@@ -29,7 +29,7 @@
 					
 			         <div class="form-group">
                             <label class="form-label">Status</label>
-                            <select name="question_status" class="form-control" data-validation="[NOTEMPTY]" required>
+                            <select name="question_status" id="question_status" class="form-control" data-validation="[NOTEMPTY]" required>
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                             
@@ -68,17 +68,32 @@
 			             <div class="input-append input-group"> 
 
 			             	    <label class="utils__control utils__control--radio">
-			                        <input type="radio" class="correct_answer" name="correct_answer[]" value="1">
+			                        <input type="radio" class="correct_answer" name="correct_answer" value="0">
 			                        <span class="utils__control__indicator"></span>
 			                    </label>
-			               <textarea  class="form-control" placeholder="" name="answer[]"></textarea>
+			               <textarea  class="form-control question_choice" placeholder="" name="answer[]"></textarea>
+			             </div>
+			         </div>
+					<div class="col-md-1">
+			         <!-- <button type="button" class="btn btn-icon btn-outline-primary add_newchoice"><i class="fa fa-plus" aria-hidden="true"></i></button> -->
+			        </div> 
+				</div>	
+				
+				<div class="row">
+			         <div class="form-group col-md-10"> 
+			             <div class="input-append input-group"> 
+
+			             	    <label class="utils__control utils__control--radio">
+			                        <input type="radio" class="correct_answer" name="correct_answer" value="1">
+			                        <span class="utils__control__indicator"></span>
+			                    </label>
+			               <textarea  class="form-control question_choice" placeholder="" name="answer[]"></textarea>
 			             </div>
 			         </div>
 					<div class="col-md-1">
 			         <button type="button" class="btn btn-icon btn-outline-primary add_newchoice"><i class="fa fa-plus" aria-hidden="true"></i></button>
 			        </div> 
-				</div>	
-				
+				</div>
 
 				<div id="append_template"></div>
 					
@@ -105,22 +120,7 @@
 
 		</div>
 
-
-                <div class="row choiceTemplate" style="display: none" id="choice_template">
-			         <div class="form-group col-md-10"> 
-			             <div class="input-append input-group"> 
-
-			             	    <label class="utils__control utils__control--radio">
-			                        <input type="radio" class="correct_answer" name="correct_answer[]" value="1">
-			                        <span class="utils__control__indicator"></span>
-			                    </label>
-			               <textarea  class="form-control" placeholder="" name="answer[]"></textarea>
-			             </div>
-			         </div>
-					<div class="col-md-1">
-			         <button type="button" class="btn btn-icon btn-outline-primary remove_choice"><i class="fa fa-minus" aria-hidden="true"></i></button>
-			        </div> 
-				</div>
+                
 
 <script>
 	$('#main_category').change(function() {
@@ -141,3 +141,19 @@
 <script src="{{ asset('js/admin/question.js') }}"></script>
 
 @endsection
+
+
+<div class="row choiceTemplate" style="display: none" id="choice_template">
+			         <div class="form-group col-md-10"> 
+			             <div class="input-append input-group"> 
+			             	     <label class="utils__control utils__control--radio">
+			                        <input type="radio" class="correct_answer" name="correct_answer">
+			                         <span class="utils__control__indicator"></span>
+			                    </label> 
+			               <textarea  class="form-control right_choice" placeholder="" name="answer[]"></textarea>
+			             </div>
+			         </div>
+					<div class="col-md-1">
+			         <button type="button" class="btn btn-icon btn-outline-primary remove_choice"><i class="fa fa-minus" aria-hidden="true"></i></button>
+			        </div> 
+				</div>
