@@ -113,4 +113,9 @@ class CategoryController extends Controller
         }
           echo json_encode($data);
     }
+
+    public function categoryAjax() {
+        $categories = DB::table('categories')->where('isDelete', 0)->get()->toArray();
+        echo json_encode($categories);
+    }
 }
