@@ -51,4 +51,7 @@ Route::get('seentest', function() {
 	return view('admin.test.create');
 });
 Route::get('load_categories', 'CategoryController@categoryAjax');
+Route::get('load_subcategories', 'SubCategoryController@subcategoryAjax');
+Route::post('create_assessment', 'AssessmentController@store');
+
 

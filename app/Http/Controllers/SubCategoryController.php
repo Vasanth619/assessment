@@ -113,4 +113,10 @@ class SubCategoryController extends Controller
 
         //echo json_encode($data);
     }
+
+    public function subcategoryAjax(Request $request) {
+        $subcategories = SubCategory::where('parent_category_id', $request->category)->get()->toArray();
+
+        echo json_encode($subcategories);
+    }
 }

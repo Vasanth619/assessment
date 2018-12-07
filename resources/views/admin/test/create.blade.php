@@ -19,7 +19,8 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-8">
-            	<form action="" id="newassessment" name="newassessment">
+            	<form id="newassessment" action="{{ url('create_assessment') }}"  method="post" name="newassessment">
+                    @csrf()
                 <div class="row">
                     <div class="col-lg-6 form-group">
                         <div class="form-input-icon form-input-icon-right">
@@ -51,7 +52,8 @@
                         <div class="form-input-icon form-input-icon-right form-group">
                             <label for="instruction">Instruction <span class="astrik">*</span></label>
 		                    <select class="form-control height-200" id="validation-instruction" name="instruction" data-validation="[NOTEMPTY]">
-		                        <option value="">Select instruction</option>
+                                <option value="">Select instruction</option>
+		                        <option value="1">instruction</option>
 		                    </select>
                         </div>
                     </div>
@@ -97,7 +99,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
 							<label class="utils__control utils__control--checkbox">Mandatory to attempt all question
-								<input type="checkbox">
+								<input type="checkbox" name="mandetory" value="1">
 							<span class="utils__control__indicator"></span>
 							</label>
                         </div>
@@ -105,7 +107,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
 	                      <label class="utils__control utils__control--checkbox">Allow user to move back and forward
-								<input type="checkbox">
+								<input type="checkbox" name="movement" value="1">
 							<span class="utils__control__indicator"></span>
 							</label>
                         </div>
@@ -143,12 +145,12 @@
 	                      <label class="form-control-label">Pass /Fail Marks (%)
 							</label>
 								<label class="utils__control utils__control--radio">Yes
-								<input type="radio" name="radio">
+								<input type="radio" name="percentage" value="1">
 								<span class="utils__control__indicator"></span>
 								</label>
 
 								<label class="utils__control utils__control--radio">No
-								<input type="radio" name="radio" checked>
+								<input type="radio" name="percentage" checked value="0">
 								<span class="utils__control__indicator"></span>
 								</label>
                         </div>
@@ -178,7 +180,6 @@
   (function($) {
     "use strict";
     $(function () {
-
       // Form Validation
       $('#newassessment').validate({
         submit: {
@@ -186,7 +187,7 @@
             inputContainer: '.form-group',
             errorListClass: 'form-control-error',
             errorClass: 'has-danger'
-          }
+          },
         }
       });
 
@@ -196,8 +197,6 @@
         eyeOpenClass: 'icmn-eye',
         eyeCloseClass: 'icmn-eye-blocked'
       });
-
-    });
     //load category
     $.ajax({
     	url: "{{ url('load_categories') }}",
@@ -213,12 +212,60 @@
 			        text : item.name 
 			    }));
     //console.log(item.name);
-});
+            });
     	}
     });
+   //get sub category
+   $('body').on('change', '#validation-category', function() {
+    $.ajax({
+        url: "{{ url('load_subcategories') }}",
+        method: 'get',
+        data: {
+            "_token": "{{ csrf_token() }}",
+            "category": $(this).val(),
+        },
+        dataType: "json",
+        success: function(response) {
+             $('#validation-subcategory').empty();
+             $.each(response, function (i, item) {
+                $('#validation-subcategory').append($('<option>', { 
+                    value: item.id,
+                    text : item.name 
+                }));
+    //console.log(item.name);
+            });
+        }
+    });
+    });
 
+});                 
   })(jQuery)
 </script>
 
+
+<script>
+    $(function() {
+        $('#newassessment').submit(function(e) {
+            alert();
+        e.preventDefault();
+        /*var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            url: "{{ url('create_assessment') }}",
+            method: 'post',
+            data: {
+                '_token': '{{ csrf_token() }}',
+                'assment_data': form.serialize(),
+            },
+            success: function(response) {
+
+            }
+        });*/
+        
+        
+    });
+    });
+</script>
 @endsection
 
