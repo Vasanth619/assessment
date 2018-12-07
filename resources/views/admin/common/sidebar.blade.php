@@ -19,7 +19,22 @@
                     <span class="menu-left__icon icmn-cog utils__spin-delayed--pseudo-selector"></span>
                     Dashboard
                 </a>
-                      
+            <li class="menu-left__item menu-left__submenu">
+                <a href="javascript: void(0);">
+                    <span class="menu-left__icon icmn-file-text"></span>
+                   Assessments
+                </a>
+                <ul class="menu-left__list">
+                    <li class="menu-left__item">
+                        <a href="{{ url('/admin/assessment') }}">
+                            <span class="menu-left__icon">AS</span>
+                            Assessment
+                        </a>
+                    </li>
+                    
+                </ul>
+            </li>
+
             <li class="menu-left__divider"><!-- --></li>
             <li class="menu-left__item menu-left__submenu">
                 <a href="javascript: void(0);">
@@ -29,7 +44,7 @@
                 <ul class="menu-left__list">
                     <li class="menu-left__item">
                         <a href="{{ url('/admin/question') }}">
-                            <span class="menu-left__icon">LA</span>
+                            <span class="menu-left__icon">TQ</span>
                             Total Questions
                         </a>
                     </li>
